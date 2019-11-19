@@ -23,9 +23,6 @@
     <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="lda.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Lda_face.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
