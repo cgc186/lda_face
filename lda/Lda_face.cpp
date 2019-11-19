@@ -1,4 +1,4 @@
-ï»¿// Lda_face.cpp : æ­¤æ–‡ä»¶åŒ…å« "main" å‡½æ•°ã€‚ç¨‹åºæ‰§è¡Œå°†åœ¨æ­¤å¤„å¼€å§‹å¹¶ç»“æŸã€‚
+// Lda_face.cpp : ´ËÎÄ¼ş°üº¬ "main" º¯Êı¡£³ÌĞòÖ´ĞĞ½«ÔÚ´Ë´¦¿ªÊ¼²¢½áÊø¡£
 //
 
 #include <iostream>
@@ -17,7 +17,7 @@ using namespace std;
 static Mat norm_0_255(String _src) {
 
 	Mat src = imread(_src, 0);
-	// åˆ›å»ºå’Œè¿”å›ä¸€ä¸ªå½’ä¸€åŒ–åçš„å›¾åƒçŸ©é˜µ:
+	// ´´½¨ºÍ·µ»ØÒ»¸ö¹éÒ»»¯ºóµÄÍ¼Ïñ¾ØÕó:
 	Mat dst;
 	switch (src.channels()) {
 	case1:
@@ -32,7 +32,7 @@ static Mat norm_0_255(String _src) {
 	}
 	return dst;
 }
-//ä½¿ç”¨CSVæ–‡ä»¶å»è¯»å›¾åƒå’Œæ ‡ç­¾ï¼Œä¸»è¦ä½¿ç”¨stringstreamå’Œgetlineæ–¹æ³•
+//Ê¹ÓÃCSVÎÄ¼şÈ¥¶ÁÍ¼ÏñºÍ±êÇ©£¬Ö÷ÒªÊ¹ÓÃstringstreamºÍgetline·½·¨
 static void readCsv(const string filename, vector<Mat>& images, vector<int>& labels, char separator = ';') {
 	std::ifstream file(filename.c_str(), ifstream::in);
 	if (!file) {
@@ -59,7 +59,7 @@ void train(string imgTrainList) {
 	}
 	catch (cv::Exception & e) {
 		cerr << "Error opening file " << imgTrainList << ". Reason: " << e.msg << endl;
-		// æ–‡ä»¶æœ‰é—®é¢˜ï¼Œæˆ‘ä»¬å•¥ä¹Ÿåšä¸äº†äº†ï¼Œé€€å‡ºäº†
+		// ÎÄ¼şÓĞÎÊÌâ£¬ÎÒÃÇÉ¶Ò²×ö²»ÁËÁË£¬ÍË³öÁË
 		exit(1);
 	}
 	Ptr<FisherFaceRecognizer> model = FisherFaceRecognizer::create();
@@ -104,7 +104,7 @@ void test(string testFile, string templates) {
 		cout << result_message << endl;
 
 		imshow("test Object", testImages[i]);
-		imshow("Dectect Object", templatesImages[testLabels[i]-1]);
+		imshow("Dectect Object", templatesImages[testLabels[i] - 1]);
 		waitKey(0);
 	}
 	cout << "accuracy = " << float(iCorrectPrediction) / testPhotoNumber << endl;
