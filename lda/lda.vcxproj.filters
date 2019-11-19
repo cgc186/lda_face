@@ -26,5 +26,8 @@
     <ClCompile Include="Lda_face.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="LdaFace.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
