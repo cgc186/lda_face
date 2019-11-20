@@ -69,7 +69,7 @@ static void readTest(const string filename, vector<String>& images, vector<int>&
 	}
 }
 
-void train(string imgTrainList) {
+void train(string imgTrainList, string faceModelPath) {
 	vector<Mat> train_images;
 	vector<int> train_labels;
 	try {
@@ -82,18 +82,18 @@ void train(string imgTrainList) {
 	}
 	Ptr<FisherFaceRecognizer> model = FisherFaceRecognizer::create();
 	model->train(train_images, train_labels);
-	model->save("data/MyFaceFisherModel.xml");
+	model->save(faceModelPath + "MyFaceFisherModel.xml");
 }
 
-int predict(string imagePath) {
+int predict(string imagePath, string faceModelPath) {
 	Ptr<FisherFaceRecognizer> model = FisherFaceRecognizer::create();
-	model->read("data/MyFaceFisherModel.xml");
+	model->read(faceModelPath + "MyFaceFisherModel.xml");
 	Mat img = norm_0_255(imagePath);
 	int predictedLabel = model->predict(img);
 	return predictedLabel;
 }
 
-void test(string testFile, string templates) {
+void test(string testFile, string templates, string faceModelPath) {
 	vector<String> testImages;
 	vector<int> testLabels;
 	try {
@@ -119,12 +119,12 @@ void test(string testFile, string templates) {
 	int testPhotoNumber = testImages.size();
 	for (int i = 0; i < testPhotoNumber; i++) {
 
-		predictedLabel = predict(testImages[i]);
+		predictedLabel = predict(testImages[i], faceModelPath);
 
 		if (predictedLabel == testLabels[i]) {
 			iCorrectPrediction++;
 		}
-			
+
 		string result_message = format("Test Number = %d  Actual Number = %d.", predictedLabel, testLabels[i]);
 		cout << result_message << endl;
 
@@ -141,11 +141,12 @@ void test(string testFile, string templates) {
 int main() {
 
 	string imgTrainList = "data/imgTrainList.txt";
-	//train(imgTrainList);
+	String faceModelPath = "data/";
+	train(imgTrainList,faceModelPath);
 
 	string testFile = "data/test.txt";
 	string templates = "data/templates.txt";
-	test(testFile, templates);
+	test(testFile, templates, faceModelPath);
 
 	return 0;
 }
